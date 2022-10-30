@@ -61,8 +61,12 @@ jobs:
         cd build
         ninja -v
         strip davif.exe
-    - name: Upload result
-      uses: actions/upload-artifact@v3
+    - name: Upload binaries to release
+      uses: svenstaro/upload-release-action@v2
       with:
-        name: davif-win64
-        path: build/davif.exe
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: build\davif.exe
+        asset_name: davif.exe
+        tag: Latest
+        overwrite: true
+        body: "windows release"
